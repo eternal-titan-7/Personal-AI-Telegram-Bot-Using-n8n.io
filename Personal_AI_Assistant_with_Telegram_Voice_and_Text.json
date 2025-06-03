@@ -237,7 +237,7 @@
         },
         "options": {
           "timeMin": "={{$fromAI(\"date\",\"the date after which to fetch the messages in format YYYY-MM-DDTHH:MM:SS\")}}",
-          "fields": "=items(summary, description, start(dateTime))"
+          "fields": "=items(summary, start(dateTime))"
         }
       },
       "id": "c70236ea-91ab-4e47-b6f6-63a70ede5d3c",
@@ -266,7 +266,7 @@
         "start": "={{ $fromAI('startDateTime') }}",
         "end": "={{ $fromAI('endDateTime') }}",
         "additionalFields": {
-          "description": "={{ $fromAI('eventDescription') }}"
+          "summary": "={{ $fromAI('eventSummary') }}"
         }
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -570,7 +570,7 @@
       "typeVersion": 3.2,
       "position": [
         2020,
-        100
+        120
       ],
       "id": "a27e2151-d603-42e4-bc17-710000c2390b",
       "name": "Switch"
@@ -654,6 +654,39 @@
         "openAiApi": {
           "id": "iGFO2vyFohoInXjj",
           "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "calendarId": {
+          "__rl": true,
+          "value": "mypersonalassistant16@gmail.com",
+          "mode": "list",
+          "cachedResultName": "mypersonalassistant16@gmail.com"
+        },
+        "triggerOn": "eventStarted",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTrigger",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        280
+      ],
+      "id": "a967a887-5ca6-4e4e-bba9-7637725b25de",
+      "name": "Calendar Event Start Trigger",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ZMzPpo68AxoD9V99",
+          "name": "Google Calendar account"
         }
       }
     }
@@ -940,13 +973,24 @@
           }
         ]
       ]
+    },
+    "Calendar Event Start Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Assistant 👩🏻‍🏫",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "5d70a8e3-10c4-4917-8432-f94618d6d2ac",
+  "versionId": "d7cabf9d-7bd7-42b6-a4cc-26bce5bc0639",
   "meta": {
     "templateId": "2462",
     "templateCredsSetupCompleted": true,
